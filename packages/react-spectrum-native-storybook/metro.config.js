@@ -46,9 +46,16 @@ config.resolver.nodeModulesPaths = [
 // Metro/Expo's own default config aliases the bare "react-native"
 // specifier to react-native-web, and forcing it to the real native package
 // breaks that.
+// Resolved dynamically via require.resolve (not a hardcoded
+// `node_modules/react` path) — Yarn's node-modules linker doesn't
+// necessarily nest a local copy inside this package's own node_modules
+// even when the version conflicts with the root's; require.resolve finds
+// wherever it actually landed. A hardcoded path here previously broke
+// "Unable to resolve module react/jsx-runtime" once react wasn't nested
+// locally.
 const forcedModuleRoots = {
-  react: path.resolve(projectRoot, 'node_modules/react'),
-  'react-dom': path.resolve(projectRoot, 'node_modules/react-dom')
+  react: path.dirname(require.resolve('react/package.json', {paths: [projectRoot]})),
+  'react-dom': path.dirname(require.resolve('react-dom/package.json', {paths: [projectRoot]}))
 };
 const defaultResolveRequest = config.resolver.resolveRequest;
 config.resolver.resolveRequest = (context, moduleName, platform) => {
