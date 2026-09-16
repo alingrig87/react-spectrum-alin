@@ -47,7 +47,11 @@ jobs:
         run: free -h
 
       - name: Install dependencies
-        run: yarn install
+        # --no-immutable: the CI=1 env var (needed later for the Expo/Metro
+        # steps) makes Yarn Berry default to immutable installs, which
+        # refuse to touch yarn.lock — but the two new workspace packages
+        # this branch adds aren't in the committed lockfile yet.
+        run: yarn install --no-immutable
 
       - name: Build @react-spectrum/native
         run: yarn workspace @react-spectrum/native build
