@@ -132,3 +132,18 @@ export * from './utils/color';
 
 export * as tokens from './theme/tokens';
 export type {ColorPair, ColorToken, ControlSize, SpacingToken, ActionControlSize} from './theme/tokens';
+
+export {ContextualHelp} from './components/ContextualHelp';
+export type {ContextualHelpProps, ContextualHelpVariant, ContextualHelpSize} from './components/ContextualHelp';
+
+export {Card} from './components/Card';
+export type {CardProps, CardSize, CardVariant} from './components/Card';
+
+export {Table} from './components/Table';
+export type {TableProps, TableColumn, TableRow, TableDensity, TableColumnAlign} from './components/Table';
+
+export {Calendar} from './components/Calendar';
+export type {CalendarProps} from './components/Calendar';
+
+export {DatePicker} from './components/DatePicker';
+export type {DatePickerProps, DatePickerSize} from './components/DatePicker';
