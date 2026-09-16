@@ -1,0 +1,39 @@
+{
+  "name": "@react-spectrum/native",
+  "version": "0.1.0",
+  "description": "A visual-only React Native port of Spectrum 2 components, styled with real Spectrum design tokens but using plain React Native interactions instead of react-aria's DOM-based behavior.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adobe/react-spectrum"
+  },
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-native": ">=0.70.0",
+    "react-native-svg": ">=13.0.0"
+  },
+  "devDependencies": {
+    "@adobe/spectrum-tokens": "14.15.0",
+    "@types/react": "^18.2.79",
+    "react": "^18.2.0",
+    "react-native": "^0.74.5",
+    "react-native-svg": "^15.2.0",
+    "typescript": "^5.4.5"
+  }
+}
