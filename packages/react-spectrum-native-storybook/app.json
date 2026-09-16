@@ -13,6 +13,9 @@
     "web": {
       "bundler": "metro",
       "output": "single"
+    },
+    "experiments": {
+      "baseUrl": "/react-spectrum-alin/native"
     }
   }
 }

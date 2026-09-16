@@ -1,0 +1,69 @@
+name: Build and deploy react-spectrum-native Storybook (web) to GitHub Pages
+# On-device Storybook (@storybook/react-native) for the @react-spectrum/native
+# package (a visual-only React Native port of Spectrum 2), exported as a
+# static react-native-web build and published to GitHub Pages under /native/.
+#
+# This repo uses Yarn 4 (Berry, via corepack + the "packageManager" field),
+# which — unlike Yarn Classic v1 on the sibling react-spectrum-charts-alin
+# repo — has not been observed to OOM on a full install here, so this
+# workflow uses `yarn install` directly rather than falling back to npm.
+
+on:
+  push:
+    branches:
+      - rn/native-components
+  workflow_dispatch: {}
+
+concurrency:
+  group: gh-pages-deploy-native-storybook
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: --max-old-space-size=8192
+      CI: '1'
+      EXPO_NO_TELEMETRY: '1'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Enable corepack (activates the pinned Yarn 4.18.0)
+        run: corepack enable
+
+      - name: Report runner memory
+        run: free -h
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build @react-spectrum/native
+        run: yarn workspace @react-spectrum/native build
+
+      - name: Generate on-device Storybook story registry
+        run: yarn workspace react-spectrum-native-storybook storybook-generate
+
+      - name: Export static web build
+        run: npx expo export --platform web --output-dir dist
+        working-directory: packages/react-spectrum-native-storybook
+
+      - name: Deploy to GitHub Pages (/native/)
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: packages/react-spectrum-native-storybook/dist
+          publish_branch: gh-pages
+          destination_dir: native
+          keep_files: true

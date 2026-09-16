@@ -222,6 +222,16 @@
     "xml": "^1.0.1"
   },
   "resolutions": {
+    "@storybook/react-native/@storybook/react": "7.6.20",
+    "@storybook/channels": "7.6.20",
+    "@storybook/docs-tools": "7.6.20",
+    "@storybook/core-client": "7.6.20",
+    "@storybook/core-common": "7.6.20",
+    "@storybook/core-events": "7.6.20",
+    "@storybook/manager-api": "7.6.20",
+    "@storybook/preview-api": "7.6.20",
+    "@storybook/preview-web": "7.6.20",
+    "@storybook/client-logger": "7.6.20",
     "@babel/cli": "7.24.1",
     "@babel/core": "7.24.3",
     "@babel/parser": "7.24.4",
