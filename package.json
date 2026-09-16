@@ -222,6 +222,8 @@
     "xml": "^1.0.1"
   },
   "resolutions": {
+    "@react-native/babel-preset/@babel/traverse": "^7.25.0",
+    "babel-preset-expo/@babel/traverse": "^7.25.0",
     "@storybook/react-native/@storybook/react": "7.6.20",
     "@storybook/channels": "7.6.20",
     "@storybook/docs-tools": "7.6.20",
